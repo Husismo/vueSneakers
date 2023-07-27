@@ -1,0 +1,112 @@
+<template>
+    <header class="header">
+        <div class="container">
+            <div class="header__wrapper">
+                <div class="header__inner">
+                    <img class="header__logo" src="@/assets/img/logo.png" alt="logo">
+                    <div class="header__titles">
+                    <h3 class="header__title">vue SNEAKERS</h3>
+                    <h4 class="header__subtitle">Магазин лучших кроссовок</h4>
+                    </div>
+                </div>
+                <nav class="header__nav">
+                    <ul class="nav__list">
+                        <li class="nav__link">
+                            <svg>
+                                <icon 
+                                :iconName="`icon-cart`"
+                                />
+                            </svg>
+                            <div class="counter">
+                                1245 p.
+                            </div>
+                        </li>
+                        <li class="nav__link">
+                            <svg>
+                                <icon 
+                                :iconName="`icon-favorite`"
+                                />
+                            </svg>
+                        </li>
+                        <li class="nav__link">
+                                <svg>
+                                <icon 
+                                :iconName="`icon-profile`"
+                                />
+                            </svg>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+</template>
+
+<script>
+import icon from '@/components/icon.vue'
+export default {
+    components:{
+        icon
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+svg{
+    width: 18px;
+    height: 18px;
+}
+header{
+    padding-top: 45px;
+}
+.header__wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 45px;
+}
+.container{
+    border-radius: 20px 20px 0px 0px;
+    border-bottom: 1px solid #EAEAEA;;
+}
+.header__inner{
+    display: flex;
+    align-items: center;
+}
+.header__logo{
+    width: 40px;
+    height: 40px;
+    margin-right: 16px;
+}
+.header__title{
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.header__subtitle{
+    font-size: 14px;
+    font-weight: 400;
+    color: #9D9D9D;
+}
+.header__nav{
+    width: 200px;
+}
+.nav__list{
+    display: flex;
+    justify-content: space-between;
+}
+.nav__link:first-child{
+    flex-grow: 3;
+    display: flex;
+}
+.nav__link{
+    flex-grow: 1;
+}
+.counter{
+    margin-left: 10px;
+    font-size: 14px;
+    color: #5C5C5C;
+    font-weight: 600;
+}
+
+</style>

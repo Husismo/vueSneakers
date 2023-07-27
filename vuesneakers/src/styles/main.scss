@@ -1,0 +1,14 @@
+@import "@/styles/components/fonts.scss";
+@import "@/styles/components/reset.scss";
+body{
+    color: #000;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: "inter";
+    background-color: #E7F6FF;
+}
+.container{
+    max-width: 1080px;
+    margin: 0 auto;
+    background-color: #fff;
+}
