@@ -2,38 +2,46 @@
     <header class="header">
         <div class="container">
             <div class="header__wrapper">
-                <div class="header__inner">
-                    <img class="header__logo" src="@/assets/img/logo.png" alt="logo">
-                    <div class="header__titles">
-                    <h3 class="header__title">vue SNEAKERS</h3>
-                    <h4 class="header__subtitle">Магазин лучших кроссовок</h4>
+                <router-link to="/">
+                    <div class="header__inner">
+                        <img class="header__logo" src="@/assets/img/logo.png" alt="logo">
+                        <div class="header__titles">
+                        <h3 class="header__title">vue SNEAKERS</h3>
+                        <h4 class="header__subtitle">Магазин лучших кроссовок</h4>
+                        </div>
                     </div>
-                </div>
+                </router-link>
                 <nav class="header__nav">
                     <ul class="nav__list">
                         <li class="nav__link">
-                            <svg>
-                                <icon 
-                                :iconName="`icon-cart`"
-                                />
-                            </svg>
-                            <div class="counter">
-                                1245 p.
-                            </div>
-                        </li>
-                        <li class="nav__link">
-                            <svg>
-                                <icon 
-                                :iconName="`icon-favorite`"
-                                />
-                            </svg>
-                        </li>
-                        <li class="nav__link">
+                            <router-link to="/cart" class="cart__link">
                                 <svg>
-                                <icon 
-                                :iconName="`icon-profile`"
-                                />
-                            </svg>
+                                    <icon 
+                                    :iconName="`icon-cart`"
+                                    />
+                                </svg>
+                                <div class="counter">
+                                    1245 p.
+                                </div>
+                            </router-link>
+                        </li>
+                        <li class="nav__link">
+                            <router-link to="/favorite">
+                                <svg>
+                                    <icon 
+                                    :iconName="`icon-favorite`"
+                                    />
+                                </svg>
+                            </router-link>
+                        </li>
+                        <li class="nav__link">
+                            <router-link to="/profile">
+                                <svg>
+                                    <icon 
+                                    :iconName="`icon-profile`"
+                                    />
+                                </svg>
+                            </router-link>
                         </li>
                     </ul>
                 </nav>
@@ -82,6 +90,7 @@ header{
     font-size: 20px;
     font-weight: 700;
     text-transform: uppercase;
+    color: #000;
 }
 .header__subtitle{
     font-size: 14px;
@@ -98,9 +107,14 @@ header{
 .nav__link:first-child{
     flex-grow: 3;
     display: flex;
+    
 }
 .nav__link{
     flex-grow: 1;
+}
+.cart__link{
+    display: flex;
+    align-items: center;
 }
 .counter{
     margin-left: 10px;
