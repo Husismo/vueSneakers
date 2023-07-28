@@ -11,6 +11,16 @@
                         <input placeholder="Поиск..." class="shoes__search" type="text">
                     </div>
                     <div class="shoes__content">
+                        <div class="loading__wrapper" v-show="isLoading">
+                            <itemLoader />
+                            <itemLoader />
+                            <itemLoader />
+                            <itemLoader />
+                            <itemLoader />
+                            <itemLoader />
+                            <itemLoader />
+                            <itemLoader />
+                        </div>
                         <shoesItem 
                         :item="item"
                         v-for="item in shoes"
@@ -26,16 +36,19 @@
 import icon from '@/components/icon.vue'
 import shoesItem from '@/components/shoesItem.vue'
 import headerComponent from '@/components/headerComponent.vue'
+import itemLoader from '@/components/itemLoader.vue'
 export default{
     components:{
         headerComponent,
         shoesItem,
-        icon
+        icon,
+        itemLoader
     },
     methods:{
             getAllShoes(){
                 this.$api.getAllshoes.getAllshoes({
                 }).then(({data}) => {
+                    this.isLoading = false
                     this.shoes = data
                     })
                     .catch(e => {
@@ -48,6 +61,7 @@ export default{
     },
     data(){
         return{
+            isLoading: true,
             shoes: []
             }
         }
@@ -80,7 +94,7 @@ export default{
 .shoes__search:focus{
     border-color: #a7a7a7
 }
-.shoes__content{
+.shoes__content, .loading__wrapper{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 40px;

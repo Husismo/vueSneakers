@@ -16,7 +16,10 @@
                             </div>
                         </router-link>
                     </div>
-                    <div class="shoes__item">
+                    <pageShoesLoader 
+                    v-show="isLoading"
+                    />
+                    <div class="shoes__item" v-show="!isLoading">
                         <img class="item__img" :src="imgUrl" alt="item__img">
                         <div class="item__inner">
                             <div class="item__name">
@@ -41,42 +44,27 @@
 <script>
 import headerComponent from '@/components/headerComponent.vue';
 import icon from '@/components/icon.vue';
+import pageShoesLoader from '@/components/pageShoesLoader.vue';
 export default{
     data(){
         return{
+            isLoading: true,
+            name: '',
+            price: '',
+            imgUrl: ''
         }
     },
     components:{
         icon,
-        headerComponent
+        headerComponent,
+        pageShoesLoader
     },
     computed:{
         id(){
             return this.$route.params.id
         },
-        name(){
-            return this.$route.params.name
-        },
-        price(){
-            return this.$route.params.price
-        },
-        imgUrl(){
-            return this.$route.params.imgUrl
-        },
-        allItem(){
-            return this.$store.getters.allItem
-        }
     },
     methods:{
-        // addToCart(){
-        //     console.log(`Добавили в корзину:`, 
-        //     {   
-        //         name: this.name,
-        //         price:this.price, 
-        //         id: this.id, 
-        //         imgUrl: this.imgUrl
-        //     })
-        // },
         addToCart(){
             let item = {
                 name: this.name,
@@ -86,7 +74,21 @@ export default{
             }
             this.$store.commit(`addToCart`, item)
             this.$store.commit(`changeTotalPrice`, this.price)
+        },
+        getItem(){
+            this.$api.getItem.getItem(this.id)
+            .then(({data}) => {
+                this.isLoading = false,
+                this.name = data.title,
+                this.price = data.price,
+                this.imgUrl = data.imgUrl
+            }).catch(e => {
+                console.log(e)
+            })
         }
+    },
+    mounted(){
+        this.getItem()
     }
 }
 </script>
