@@ -1,27 +1,37 @@
 <template>
     <div class="item__wrapper">
-        <div class="item__img">
-            <img :src="item.imgUrl" alt="shoesItem">
-            <!-- <img src="@/assets/img/item-1.png" alt=""> -->
-        </div>
-        <div class="item__about">
-            <div class="item__name">
-                {{item.title}}
+        <router-link 
+            :to="{
+                name: 'shoesPage',
+                params:{
+                    id: item.id,
+                    name: item.title,
+                    price: item.price,
+                    imgUrl: item.imgUrl
+                }
+            }">
+            <div class="item__img">
+                    <img :src="item.imgUrl" alt="shoesItem">
             </div>
-            <div class="item__inner">
-                <div class="item__price">
-                    <p class="price__title">Цена:</p>
-                    <p>{{item.price}} руб.</p>
-                </div>
-                <div class="item__btn">
-                    <svg style="width: 32px; height: 32px; fill: currentColor;">
-                        <icon 
-                        :iconName="`icon-addToCart`"
-                        />
-                    </svg>
+            <div class="item__about">
+                    <div class="item__name">
+                            {{item.title}}
+                    </div>
+                <div class="item__inner">
+                    <div class="item__price">
+                            <p class="price__title">Цена:</p>
+                            <p>{{item.price}} руб.</p>
+                    </div>
+                    <div class="item__btn">
+                        <svg style="width: 32px; height: 32px; fill: currentColor;">
+                            <icon 
+                            :iconName="`icon-addToCart`"
+                            />
+                        </svg>
+                    </div>
                 </div>
             </div>
-        </div>
+            </router-link>
     </div>
 </template>
 
@@ -41,6 +51,9 @@ export default {
                 type: Number
             },
             imgUrl:{
+                type: String
+            },
+            id:{
                 type: String
             }
         }
@@ -94,9 +107,13 @@ export default {
     font-weight: 500;
     font-size: 11px;
 }
-.item__btn button{
+.item__btn{
     width: 32px;
     height: 32px;
-
+    color: #F2F2F2;
+    svg:hover{
+        font-weight: 400;
+        color: #9DD458;
+    }
 }
 </style>

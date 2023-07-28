@@ -4,7 +4,13 @@
         <div class="cart__wrapper">
             <div class="container">
                 <div class="cart__inner">
-                    <div class="cart__head">
+                    <stopper 
+                    v-if="cart.length == 0"
+                    :imgName="`icon-sadEmoji`"
+                    :title="`Корзина пустая`"
+                    :subTitle="`Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.`"
+                    />
+                    <div class="cart__head" v-if="cart.length > 0">
                         <router-link to="/">
                             <svg>
                                 <icon
@@ -16,14 +22,16 @@
                             Корзина
                         </div>
                     </div>
-                    <div class="cart__content">
-                        <cartItem />
-                        <cartItem />
-                        <cartItem />
+                    <div class="cart__content" v-if="cart.length > 0">
+                        <cartItem 
+                        :cartItem = 'item'
+                        v-for="item in cart"
+                        :key="item.id"
+                        />
 
                         <div class="cart__info">
                             <div class="cart__total">
-                                Итого: <span>21 150 руб.</span> 
+                                Итого: <span>{{totalPrice}} руб.</span> 
                             </div>
                             <div class="cart__info__wrapper">
                                 <button class="cart__btn">
@@ -42,11 +50,26 @@
 import headerComponent from '@/components/headerComponent.vue';
 import cartItem from '@/components/cartItem.vue'
 import icon from '@/components/icon.vue';
+import stopper from '@/components/stopper.vue';
 export default {
     components:{
         headerComponent,
         cartItem,
-        icon
+        icon,
+        stopper
+    },
+    computed:{
+        totalPrice(){
+            return this.$store.getters.getTotalPrice
+        }
+    },
+    data(){
+        return{
+            cart: [],
+        }
+    },
+    mounted(){
+        this.cart = this.$store.getters.allItems
     }
 }
 </script>

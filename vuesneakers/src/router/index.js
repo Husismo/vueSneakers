@@ -4,6 +4,7 @@ import homePage from '@/views/homePage.vue'
 import cartPage from '@/views/cartPage.vue'
 import favoritePage from '@/views/favoritePage.vue'
 import profilePage from '@/views/profilePage.vue'
+import shoesPage from '@/views/shoesPage.vue'
 
 Vue.use(VueRouter)
 
@@ -27,7 +28,13 @@ const routes = [
         path: '/profile',
         name: 'profile',
         component: profilePage
-    }
+    },
+    {
+        path: '/:id',
+        name: 'shoesPage',
+        component: shoesPage,
+        props: true
+    },
 
 ]
 

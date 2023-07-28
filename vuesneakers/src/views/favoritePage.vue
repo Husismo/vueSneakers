@@ -4,7 +4,13 @@
         <div class="favorite__wrapper">
             <div class="container">
                 <div class="favorite__inner">
-                    <div class="favorite__head ">
+                    <stopper 
+                    v-if="favoriteShoes.length == 0"
+                    :imgName="`icon-cryingEmoji`"
+                    :title="`Закладок нет :(`"
+                    :subTitle="`Вы ничего не добавляли в закладки`"
+                    />
+                    <div class="favorite__head" v-if="favoriteShoes.length > 0">
                         <router-link to="/">
                             <svg>
                                 <icon
@@ -16,7 +22,7 @@
                             Мои закладки
                         </div>
                     </div>
-                    <div class="favorite__content">
+                    <div class="favorite__content" v-if="favoriteShoes.length > 0">
                         <shoesItem 
                         :item="item"
                         v-for="item in favoriteShoes"
@@ -33,45 +39,23 @@
 import headerComponent from "@/components/headerComponent.vue";
 import icon from "@/components/icon.vue"
 import shoesItem from '@/components/shoesItem.vue';
+import stopper from "@/components/stopper.vue";
 export default{
     components:{
         headerComponent,
         icon,
-        shoesItem
+        shoesItem,
+        stopper
     },
     data(){
         return{
             favoriteShoes: [
-                {
-                    title: "Кроссовки Nike Blazer Mid Suede",
-                    imgUrl: "https://cdn.sneakshero.com/pi/l/180769-nike-blazer-mid-77-vintage-suede-mix-cz4609-300.jpg?ceef4728",
-                    price: 12999,
-                    id: 147258369
-                },
-                {
-                    title: "Кроссовки Nike Blazer Mid Suede",
-                    imgUrl: "https://cdn.sneakshero.com/pi/l/180769-nike-blazer-mid-77-vintage-suede-mix-cz4609-300.jpg?ceef4728",
-                    price: 12999,
-                    id: 147258369
-                },
-                {
-                    title: "Кроссовки Nike Blazer Mid Suede",
-                    imgUrl: "https://cdn.sneakshero.com/pi/l/180769-nike-blazer-mid-77-vintage-suede-mix-cz4609-300.jpg?ceef4728",
-                    price: 12999,
-                    id: 147258369
-                },
-                {
-                    title: "Кроссовки Nike Blazer Mid Suede",
-                    imgUrl: "https://cdn.sneakshero.com/pi/l/180769-nike-blazer-mid-77-vintage-suede-mix-cz4609-300.jpg?ceef4728",
-                    price: 12999,
-                    id: 147258369
-                },
-                {
-                    title: "Кроссовки Nike Blazer Mid Suede",
-                    imgUrl: "https://cdn.sneakshero.com/pi/l/180769-nike-blazer-mid-77-vintage-suede-mix-cz4609-300.jpg?ceef4728",
-                    price: 12999,
-                    id: 147258369
-                }
+                // {
+                //     title: "Кроссовки Nike Blazer Mid Suede",
+                //     imgUrl: "https://cdn.sneakshero.com/pi/l/180769-nike-blazer-mid-77-vintage-suede-mix-cz4609-300.jpg?ceef4728",
+                //     price: 12999,
+                //     id: 147258369
+                // }
             ]
         }
     }

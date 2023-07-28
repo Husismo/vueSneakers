@@ -2,17 +2,17 @@
     <div class="root">
         <div class="cart__item">
             <div class="cart__wrapper">
-                <img class="item__img" src="../assets/img/item-1.png" alt="item-img">
+                <img class="item__img" :src="cartItem.imgUrl" alt="item-img">
                 <div class="item__inner">
                     <div class="item__name">
-                        Мужские Кроссовки Nike Air Max 270
+                        {{cartItem.name}}
                     </div>
                     <div class="item__price">
-                        12 999 руб.
+                        {{cartItem.price}}
                     </div>
                 </div>
             </div>
-            <svg class="delete__btn">
+            <svg class="delete__btn" @click="removeFromCart(cartItem)">
                 <icon 
                 :iconName="`icon-delete`"
                 />
@@ -26,6 +26,27 @@ import icon from './icon.vue';
 export default{
     components:{
         icon
+    },
+    methods:{
+        removeFromCart(cartItem){
+            this.$store.commit('removeFromCart', cartItem);
+        }
+    },
+    props:{
+        cartItem:{
+            name:{
+                type: String
+            },
+            price:{
+                type: Number,
+            },
+            imgUrl:{
+                type: String,
+            },
+            id:{
+                type: Number
+            }
+        }
     }
 }
 </script>

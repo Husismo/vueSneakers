@@ -20,8 +20,8 @@
                                     :iconName="`icon-cart`"
                                     />
                                 </svg>
-                                <div class="counter">
-                                    1245 p.
+                                <div class="counter" v-show="totalPrice > 0">
+                                    {{totalPrice}}
                                 </div>
                             </router-link>
                         </li>
@@ -55,6 +55,15 @@ import icon from '@/components/icon.vue'
 export default {
     components:{
         icon
+    },
+    data(){
+        return{
+        }
+    },
+    computed:{
+        totalPrice(){
+            return this.$store.getters.getTotalPrice
+        }
     }
 }
 </script>
