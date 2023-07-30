@@ -5,12 +5,12 @@
             <div class="container">
                 <div class="profile__inner">
                     <stopper 
-                    v-if="purchased.length == 0"
+                    v-if="orders.length == 0 && isLoading == false"
                     :imgName="`icon-angryEmoji`"
                     :title="`У вас нет заказов`"
                     :subTitle="`Оформите хотя бы один заказ.`"
                     />
-                    <div class="profile__head" v-if="purchased.length > 0">
+                    <div class="profile__head" v-show="orders.length > 0">
                         <router-link to="/">
                             <svg>
                                 <icon
@@ -22,10 +22,20 @@
                             Мои покупки
                         </div>
                     </div>
-                    <div class="profile__content" v-if="purchased.length > 0">
+                    <div class="loading__wrapper" v-show="isLoading">
+                        <itemLoader/>
+                        <itemLoader/>
+                        <itemLoader/>
+                        <itemLoader/>
+                        <itemLoader/>
+                        <itemLoader/>
+                        <itemLoader/>
+                        <itemLoader/>
+                    </div>
+                    <div class="profile__content" v-show="orders.length > 0">
                         <shoesItem 
                         :item="item"
-                        v-for="item in purchased"
+                        v-for="item in orders"
                         :key="item.id"
                         />
                     </div>
@@ -40,24 +50,41 @@ import headerComponent from "@/components/headerComponent.vue";
 import icon from "@/components/icon.vue";
 import shoesItem from "@/components/shoesItem.vue";
 import stopper from "@/components/stopper.vue";
+import itemLoader from "@/components/itemLoader.vue"
 export default{
     components:{
         headerComponent,
         icon,
         shoesItem,
-        stopper
+        stopper,
+        itemLoader
     },
     data(){
         return{
-            purchased: [
-                // {
-                //         title: "Кроссовки Nike Blazer Mid Suede",
-                //         imgUrl: "https://cdn.sneakshero.com/pi/l/180769-nike-blazer-mid-77-vintage-suede-mix-cz4609-300.jpg?ceef4728",
-                //         price: 12999,
-                //         id: 147258369
-                // },
-            ]
+            orders: [
+            ],
+            isLoading: true,
         }
+    },
+    methods:{
+        getOrders(){
+            this.$api.getOrders.getOrders()
+            .then(({data}) => {
+                for (let item in data){
+                    for (let cartItem of data[item].cart){
+                        this.orders.push(cartItem)
+                        console.log(cartItem)
+                    }
+                }
+                this.isLoading = !this.isLoading
+
+            }).catch(e => {
+                console.log(e)
+            })
+        }
+    },
+    mounted(){
+        this.getOrders()
     }
 }
 </script>

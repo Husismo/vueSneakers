@@ -33,20 +33,7 @@ export default{
         }
     },
     props:{
-        cartItem:{
-            name:{
-                type: String
-            },
-            price:{
-                type: Number,
-            },
-            imgUrl:{
-                type: String,
-            },
-            id:{
-                type: Number
-            }
-        }
+        cartItem:{}
     }
 }
 </script>

@@ -24,6 +24,10 @@ export default{
                 state.cart.splice(index, 1);
                 state.totalPrice -= item.price
             }
+        },
+        clearCart(state){
+            state.cart.splice(0)
+            state.totalPrice = 0
         }
     },
     actions: {

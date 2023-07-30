@@ -20,8 +20,8 @@
                                     :iconName="`icon-cart`"
                                     />
                                 </svg>
-                                <div class="counter" v-show="totalPrice > 0">
-                                    {{totalPrice}}
+                                <div class="counter">
+                                    {{totalPrice}} руб.
                                 </div>
                             </router-link>
                         </li>

@@ -28,10 +28,15 @@
                             <div class="item__price">
                                 {{price}} руб.
                             </div>
-                            <div class="item__btn">
-                                <button @click="addToCart">
+                            <div class="itemBtn__wrapper">
+                                <button v-show="!addedToCart" class="item__addToCartBtn" @click="addToCart">
                                     добавить в корзину
                                 </button>
+                                <router-link v-show="addedToCart" to="/cart">
+                                    <button class="item__goToCartBtn" >
+                                        перейти в коризну
+                                    </button>
+                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -49,6 +54,7 @@ export default{
     data(){
         return{
             isLoading: true,
+            addedToCart: false,
             name: '',
             price: '',
             imgUrl: ''
@@ -66,6 +72,7 @@ export default{
     },
     methods:{
         addToCart(){
+            this.addedToCart = !this.addedToCart
             let item = {
                 name: this.name,
                 price:this.price, 
@@ -79,7 +86,7 @@ export default{
             this.$api.getItem.getItem(this.id)
             .then(({data}) => {
                 this.isLoading = false,
-                this.name = data.title,
+                this.name = data.name,
                 this.price = data.price,
                 this.imgUrl = data.imgUrl
             }).catch(e => {
@@ -135,20 +142,29 @@ export default{
     font-weight: 700;
     margin-bottom: 100px;
 }
-.item__btn{
+.itemBtn__wrapper{
     button{
-        cursor: pointer;
-        text-transform: uppercase;
-        border: none;
-        background-color: rgb(168, 205, 47);
-        padding: 15px 30px;
-        border-radius: 25px;
-        font-weight: 700;
-        font-size: 16px;
-        color: #fff;
-        transition: 0.3s;
+    cursor: pointer;
+    text-transform: uppercase;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: 0.3s;
     }
-    button:hover{
+}
+.item__addToCartBtn{
+    background-color: rgb(168, 205, 47);
+    color: #fff;
+    &:hover{
+        box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    }
+}
+.item__goToCartBtn{
+    background-color: rgb(255, 252, 73);
+    color: #000;
+    &:hover{
         box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
     }
 }

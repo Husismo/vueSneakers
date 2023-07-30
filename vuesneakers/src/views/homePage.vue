@@ -5,10 +5,13 @@
             <div class="container">
                 <div class="shoes__inner">
                     <div class="shoes__head">
-                        <h3 class="shoes__title title">
+                        <h3 v-show="!search" class="shoes__title title">
                             Все кроссовки
                         </h3>
-                        <input placeholder="Поиск..." class="shoes__search" type="text">
+                        <h3 v-show="search" class="shoes__title title">
+                            Поиск по запросу: "{{ search }}"
+                        </h3>
+                        <input v-model.trim="search" placeholder="Поиск..." class="shoes__search" type="text">
                     </div>
                     <div class="shoes__content">
                         <div class="loading__wrapper" v-show="isLoading">
@@ -62,7 +65,8 @@ export default{
     data(){
         return{
             isLoading: true,
-            shoes: []
+            shoes: [],
+            search: ''
             }
         }
     }

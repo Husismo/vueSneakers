@@ -4,7 +4,10 @@
         <div class="order__wrapper">
             <div class="container">
                 <div class="order__inner">
-                    <div class="cart__head">
+                    <orderConfirm 
+                    v-show="orderConfirm"
+                    />
+                    <div class="cart__head" v-show="!orderConfirm">
                         <router-link to="/cart">
                             <svg>
                                 <icon
@@ -16,7 +19,7 @@
                             Оформить заказ:
                         </div>
                     </div>
-                    <div class="order__content">
+                    <div class="order__content" v-show="!orderConfirm">
                         <div class="order__items">
                             <orderItem 
                             :orderItem="item"
@@ -50,6 +53,7 @@
                                 class="order__btn"
                                 form="order-form"
                                 type="submit"
+                                :class="{'disabledBtn' : isBtnDisabled == true}"
                                 >
                                     Оформить заказ
                                 </button>
@@ -65,6 +69,7 @@
 import headerComponent from "@/components/headerComponent.vue";
 import icon from "@/components/icon.vue";
 import orderItem from '@/components/orderItem.vue';
+import orderConfirm from '@/components/orderConfirm.vue';
 import { validationMixin } from 'vuelidate';
 import { required, minLength, email } from 'vuelidate/lib/validators'
 export default{
@@ -72,7 +77,8 @@ export default{
     components:{
         headerComponent,
         icon,
-        orderItem
+        orderItem,
+        orderConfirm,
     },
     data(){
         return{
@@ -84,6 +90,8 @@ export default{
                 adress: '',
                 comment: '',
             },
+            isBtnDisabled: 'false',
+            orderConfirm: false,
         }
     },
     validations:{
@@ -104,17 +112,19 @@ export default{
         createOrder(event){
             event.preventDefault();
             if (this.checkForm()){
+                this.isBtnDisabled = true // костыли
+                document.querySelector(`.order__btn`).setAttribute(`disabled`, true) //костыли
                 this.$api.postOrder.postOrder({ 
                 order: this.order,
                 cart: this.cart
             }).then(({data}) => {
-                    })
+                    this.orderConfirm = true
+                    this.$store.commit(`clearCart`)
+                })
                     .catch(e => {
                         console.log(e)
-            })
+                    })
             }
-            // this.isBtnDisabled = true // костыли
-            // document.querySelector(`.order__btn`).setAttribute(`disabled`, true) //костыли
         }
     },
     mounted(){

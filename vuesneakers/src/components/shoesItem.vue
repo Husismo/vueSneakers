@@ -1,21 +1,22 @@
 <template>
     <div class="item__wrapper">
-        <router-link 
-            :to="{
-                name: 'shoesPage',
-                params:{
-                    id: item.id,
-                    name: item.title,
-                    price: item.price,
-                    imgUrl: item.imgUrl
-                }
-            }">
             <div class="item__img">
+                <router-link 
+                    :to="{
+                    name: 'shoesPage',
+                    params:{
+                        id: item.id,
+                        name: item.name,
+                        price: item.price,
+                        imgUrl: item.imgUrl
+                        }
+                    }">
                     <img :src="item.imgUrl" alt="shoesItem">
+                </router-link>
             </div>
             <div class="item__about">
                     <div class="item__name">
-                            {{item.title}}
+                        {{item.name}}
                     </div>
                 <div class="item__inner">
                     <div class="item__price">
@@ -23,15 +24,25 @@
                             <p>{{item.price}} руб.</p>
                     </div>
                     <div class="item__btn">
-                        <svg style="width: 32px; height: 32px; fill: currentColor;">
+                        <svg 
+                        v-show="!isAddedToCart" 
+                        @click="addToCart"
+                        style="width: 32px; height: 32px; fill: currentColor;">
                             <icon 
                             :iconName="`icon-addToCart`"
+                            />
+                        </svg>
+
+                        <svg 
+                        v-show="isAddedToCart"
+                        style="width: 32px; height: 32px; fill: currentColor;">
+                            <icon 
+                            :iconName="`icon-addedToCart`"
                             />
                         </svg>
                     </div>
                 </div>
             </div>
-            </router-link>
     </div>
 </template>
 
@@ -42,24 +53,39 @@ export default {
     components:{
             icon
         },
+    methods:{
+        addToCart(){
+            this.isAddedToCart = !this.isAddedToCart
+            this.addedToCart = !this.addedToCart
+            let item = {
+                name: this.item.name,
+                price:this.item.price, 
+                id: this.item.id, 
+                imgUrl: this.item.imgUrl
+            }
+            this.$store.commit(`addToCart`, item)
+            this.$store.commit(`changeTotalPrice`, this.item.price)
+        },
+    },
     props:{
         item:{
-            title:{
-                type: String
-            },
-            price:{
-                type: Number
-            },
-            imgUrl:{
-                type: String
-            },
-            id:{
-                type: String
-            }
+            // name:{
+            //     type: String
+            // },
+            // price:{
+            //     type: Number
+            // },
+            // imgUrl:{
+            //     type: String
+            // },
+            // id:{
+            //     type: Number
+            // }
         }
     },
     data(){
         return{
+            isAddedToCart: false
         }
     }
 }
