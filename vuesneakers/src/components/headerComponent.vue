@@ -84,7 +84,7 @@ header{
 }
 .container{
     border-radius: 20px 20px 0px 0px;
-    border-bottom: 1px solid #EAEAEA;;
+    border-bottom: 1px solid #EAEAEA;
 }
 .header__inner{
     display: flex;

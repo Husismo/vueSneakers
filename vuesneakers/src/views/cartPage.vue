@@ -34,9 +34,11 @@
                                 Итого: <span>{{totalPrice}} руб.</span> 
                             </div>
                             <div class="cart__info__wrapper">
-                                <button class="cart__btn">
-                                    Оформить заказ
-                                </button>
+                                <router-link to="/order">
+                                    <button class="cart__btn">
+                                        Оформить заказ
+                                    </button>
+                                </router-link>
                             </div>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ import cartPage from '@/views/cartPage.vue'
 import favoritePage from '@/views/favoritePage.vue'
 import profilePage from '@/views/profilePage.vue'
 import shoesPage from '@/views/shoesPage.vue'
+import orderPage from '@/views/orderPage.vue'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,11 @@ const routes = [
         path: '/profile',
         name: 'profile',
         component: profilePage
+    },
+    {
+        path: '/order',
+        name: 'orderPage',
+        component: orderPage
     },
     {
         path: '/:id',
