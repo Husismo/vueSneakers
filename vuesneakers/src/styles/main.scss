@@ -1,22 +1,21 @@
 @import "@/styles/components/fonts.scss";
 @import "@/styles/components/reset.scss";
-body{
-    color: #000;
-    font-size: 14px;
-    font-weight: 400;
-    font-family: "inter";
-    background-color: #E7F6FF;
+body {
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "inter";
+  background-color: #e7f6ff;
 }
-.container{
-    max-width: 1080px;
-    margin: 0 auto;
-    background-color: #fff;
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  background-color: #fff;
 }
-.title{
-    font-size: 32px;
-    font-weight: 700;
+.title {
+  font-size: 32px;
+  font-weight: 700;
 }
-a{
-    color: #000;
+a {
+  color: #000;
 }
-
