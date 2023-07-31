@@ -5,13 +5,9 @@
             <div class="container">
                 <div class="shoes__inner">
                     <div class="shoes__head">
-                        <h3 v-show="!search" class="shoes__title title">
+                        <h3 class="shoes__title title">
                             Все кроссовки
                         </h3>
-                        <h3 v-show="search" class="shoes__title title">
-                            Поиск по запросу: "{{ search }}"
-                        </h3>
-                        <input v-model.trim="search" placeholder="Поиск..." class="shoes__search" type="text">
                     </div>
                     <div class="shoes__content">
                         <div class="loading__wrapper" v-show="isLoading">
@@ -50,15 +46,15 @@ export default{
     methods:{
             getAllShoes(){
                 this.$api.getAllshoes.getAllshoes({
-                }).then(({data}) => {
-                    this.isLoading = false
-                    this.shoes = data
-                    })
-                    .catch(e => {
-                        console.log(e)
-                    })
-                    }
+                    }).then(({data}) => {
+                        this.isLoading = false
+                        this.shoes = data
+                        })
+                        .catch(e => {
+                            console.log(e)
+                        })
                 },
+            },
     mounted(){
         this.getAllShoes()
     },
@@ -66,7 +62,6 @@ export default{
         return{
             isLoading: true,
             shoes: [],
-            search: ''
             }
         }
     }
@@ -74,6 +69,9 @@ export default{
 
 <style lang="scss">
 @import "@/styles/main.scss";
+.container{
+    border-radius:0 0 20px 20px ;
+}
 .shoes__inner{
     padding: 45px;
 }
