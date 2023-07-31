@@ -29,7 +29,7 @@
                             <router-link to="/favorite">
                                 <svg>
                                     <icon 
-                                    :iconName="`icon-favorite`"
+                                    :iconName="`icon-favorites`"
                                     />
                                 </svg>
                             </router-link>

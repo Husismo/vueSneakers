@@ -12,7 +12,7 @@
                     </div>
                 </div>
             </div>
-            <svg class="delete__btn" @click="removeFromCart(cartItem)">
+            <svg class="delete__btn" @click="removeFromCart()">
                 <icon 
                 :iconName="`icon-delete`"
                 />
@@ -28,8 +28,9 @@ export default{
         icon
     },
     methods:{
-        removeFromCart(cartItem){
-            this.$store.commit('removeFromCart', cartItem);
+        removeFromCart(){
+            // console.log(this.cartItem)
+            this.$store.commit('removeFromCart', this.cartItem);
         }
     },
     props:{
@@ -52,6 +53,10 @@ export default{
         width: 40px;
         height: 40px;
         align-items: end;
+        color: #ecebeb;
+        &:hover{
+            color: #c5c5c5;
+        }
     }
 }
 .cart__item:hover{

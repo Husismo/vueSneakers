@@ -9,7 +9,7 @@
                     />
                     <div class="cart__head" v-show="!orderConfirm">
                         <router-link to="/cart">
-                            <svg>
+                            <svg class="back__btn">
                                 <icon
                                 :iconName="`icon-back`"
                                 />

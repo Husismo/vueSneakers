@@ -12,7 +12,7 @@
                     />
                     <div class="favorite__head" v-if="favoriteShoes.length > 0">
                         <router-link to="/">
-                            <svg>
+                            <svg class="back__btn">
                                 <icon
                                 :iconName="`icon-back`"
                                 />
@@ -49,15 +49,11 @@ export default{
     },
     data(){
         return{
-            favoriteShoes: [
-                // {
-                //     title: "Кроссовки Nike Blazer Mid Suede",
-                //     imgUrl: "https://cdn.sneakshero.com/pi/l/180769-nike-blazer-mid-77-vintage-suede-mix-cz4609-300.jpg?ceef4728",
-                //     price: 12999,
-                //     id: 147258369
-                // }
-            ]
+            favoriteShoes: []
         }
+    },
+    mounted(){
+        this.favoriteShoes = this.$store.getters.getallFavorites
     }
 }
 </script>

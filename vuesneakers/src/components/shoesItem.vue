@@ -1,5 +1,18 @@
 <template>
     <div class="item__wrapper">
+        <svg class="favorite__btn"
+        @click="addToFavorite"
+        v-show="!isAddedToFavorite"
+        >
+            <icon
+            :iconName="`icon-favorite`" />
+        </svg>
+        <svg class="favorite__btn"
+        @click="removeFromFavorite"
+        v-show="isAddedToFavorite">
+            <icon
+            :iconName="`icon-favorited`" />
+        </svg>
             <div class="item__img">
                 <router-link 
                     :to="{
@@ -8,7 +21,7 @@
                         id: item.id,
                         name: item.name,
                         price: item.price,
-                        imgUrl: item.imgUrl
+                        imgUrl: item.imgUrl,
                         }
                     }">
                     <img :src="item.imgUrl" alt="shoesItem">
@@ -35,6 +48,7 @@
 
                         <svg 
                         v-show="isAddedToCart"
+                        @click="removeFromCart"
                         style="width: 32px; height: 32px; fill: currentColor;">
                             <icon 
                             :iconName="`icon-addedToCart`"
@@ -57,15 +71,29 @@ export default {
         addToCart(){
             this.isAddedToCart = !this.isAddedToCart
             this.addedToCart = !this.addedToCart
-            let item = {
-                name: this.item.name,
-                price:this.item.price, 
-                id: this.item.id, 
-                imgUrl: this.item.imgUrl
-            }
-            this.$store.commit(`addToCart`, item)
+            this.$store.commit(`addToCart`, this.item)
             this.$store.commit(`changeTotalPrice`, this.item.price)
         },
+        removeFromCart(){
+            this.isAddedToCart = !this.isAddedToCart
+            this.$store.commit('removeFromCart', this.item);
+        },
+        checkAdded(){
+            if(this.$store.getters.isItemAdded(this.item)){
+                this.isAddedToCart = true
+            }
+            if (this.$store.getters.isFavoriteAdded(this.item)){
+                this.isAddedToFavorite = true
+            }
+        },
+        addToFavorite(){
+            this.isAddedToFavorite = !this.isAddedToFavorite
+            this.$store.commit('addToFavorite', this.item)
+        },
+        removeFromFavorite(){
+            this.isAddedToFavorite = !this.isAddedToFavorite
+            this.$store.commit('removeFromFavorite', this.item);
+        }
     },
     props:{
         item:{
@@ -85,8 +113,12 @@ export default {
     },
     data(){
         return{
-            isAddedToCart: false
+            isAddedToCart: false,
+            isAddedToFavorite: false
         }
+    },
+    mounted(){
+        this.checkAdded()
     }
 }
 </script>
@@ -101,6 +133,7 @@ export default {
     align-items: center;
     border-radius: 20px;
     transition: .3s;
+    position: relative;
 }
 .item__wrapper:hover{
     box-shadow: 0px 14px 30px 0px rgba(0, 0, 0, 0.05);
@@ -138,8 +171,18 @@ export default {
     height: 32px;
     color: #F2F2F2;
     svg:hover{
-        font-weight: 400;
         color: #9DD458;
+    }
+}
+.favorite__btn{
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    color: #eeeeee;
+    &:hover{
+        color: #ff9c9c;
     }
 }
 </style>

@@ -6,7 +6,7 @@
                 <div class="shoesPage__inner">
                     <div class="shoesPage__head">
                         <router-link to="/">
-                            <svg>
+                            <svg class="back__btn">
                                 <icon
                                 :iconName="`icon-back`"
                                 />
@@ -92,10 +92,22 @@ export default{
             }).catch(e => {
                 console.log(e)
             })
+        },
+        checkAdded(){
+            let item = {
+                name: this.name,
+                price:this.price, 
+                id: this.id, 
+                imgUrl: this.imgUrl
+            }
+            if(this.$store.getters.isItemAdded(item)){
+                this.addedToCart = true
+            }
         }
     },
     mounted(){
         this.getItem()
+        this.checkAdded()
     }
 }
 </script>

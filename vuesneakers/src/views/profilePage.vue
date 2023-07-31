@@ -12,7 +12,7 @@
                     />
                     <div class="profile__head" v-show="orders.length > 0">
                         <router-link to="/">
-                            <svg>
+                            <svg class="back__btn">
                                 <icon
                                 :iconName="`icon-back`"
                                 />
@@ -73,7 +73,6 @@ export default{
                 for (let item in data){
                     for (let cartItem of data[item].cart){
                         this.orders.push(cartItem)
-                        console.log(cartItem)
                     }
                 }
                 this.isLoading = !this.isLoading

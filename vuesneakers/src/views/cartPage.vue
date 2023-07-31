@@ -12,7 +12,7 @@
                     />
                     <div class="cart__head" v-if="cart.length > 0">
                         <router-link to="/">
-                            <svg>
+                            <svg class="back__btn">
                                 <icon
                                 :iconName="`icon-back`"
                                 />
@@ -117,5 +117,15 @@ export default {
     border: none;
     cursor: pointer;
     background: #9DD458;
+    transition: .3s;
+    &:hover{
+        box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    }
+}
+.back__btn{
+    color: #EAEAEA;
+    &:hover{
+        color: #c5c5c5;
+    }
 }
 </style>
