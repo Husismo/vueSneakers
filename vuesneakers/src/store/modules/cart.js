@@ -3,39 +3,51 @@ export default {
     cart: [],
     totalPrice: 0,
   },
+
   getters: {
     allItems(state) {
       return state.cart;
     },
+
     getTotalPrice(state) {
       return state.totalPrice;
     },
+
     isItemAdded: (state) => (item) => {
-      let index = state.cart.findIndex((obj) => obj.id === item.id);
-      if (index >= 0) {
-        return true;
-      }
+      let index = state.cart.findIndex((cartItem) => cartItem.id === item.id);
+
+      // if (index >= 0) {
+      //   return true;
+      // }
+      return index >= 0;
     },
   },
+
   mutations: {
     addToCart(state, item) {
       state.cart.push(item);
     },
+
     changeTotalPrice(state, price) {
       state.totalPrice += price;
     },
+
     removeFromCart(state, item) {
-      let index = state.cart.findIndex((obj) => obj.id === item.id);
+      let index = state.cart.findIndex((cartItem) => cartItem.id === item.id);
+
       if (index > -1) {
         state.cart.splice(index, 1);
         state.totalPrice -= item.price;
       }
     },
+
     clearCart(state) {
       state.cart.splice(0);
       state.totalPrice = 0;
     },
   },
+
   actions: {},
+
   modules: {},
 };

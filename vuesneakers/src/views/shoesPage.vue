@@ -20,6 +20,14 @@
                 {{ name }}
               </div>
               <div class="item__price">{{ price }} руб.</div>
+              <!-- 
+                Переделать к примеру на:
+                add-to-cart (itemBtn__wrapper)
+                add-to-cart__button (item__addToCartBtn)
+                add-to-cart__cart-link (item__goToCartBtn)
+
+                Это касается и других файлов
+              -->
               <div class="itemBtn__wrapper">
                 <button
                   v-show="!addedToCart"
@@ -44,6 +52,7 @@
 import headerComponent from "@/components/headerComponent.vue";
 import icon from "@/components/icon.vue";
 import pageShoesLoader from "@/components/pageShoesLoader.vue";
+
 export default {
   data() {
     return {
@@ -54,16 +63,19 @@ export default {
       imgUrl: "",
     };
   },
+  
   components: {
     icon,
     headerComponent,
     pageShoesLoader,
   },
+  
   computed: {
     id() {
       return this.$route.params.id;
     },
   },
+  
   methods: {
     addToCart() {
       this.addedToCart = !this.addedToCart;
@@ -76,6 +88,7 @@ export default {
       this.$store.commit(`addToCart`, item);
       this.$store.commit(`changeTotalPrice`, this.price);
     },
+    
     getItem() {
       this.$api.getItem
         .getItem(this.id)
@@ -89,6 +102,7 @@ export default {
           console.log(e);
         });
     },
+    
     checkAdded() {
       let item = {
         name: this.name,
@@ -101,6 +115,7 @@ export default {
       }
     },
   },
+  
   mounted() {
     this.getItem();
     this.checkAdded();
@@ -109,47 +124,85 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.shoesPage__inner {
-  padding: 45px;
-}
-.shoesPage__head {
-  margin-bottom: 36px;
-  svg {
-    width: 32px;
-    height: 32px;
-    margin-right: 12px;
+.shoesPage {
+  &__inner {
+    padding: 45px;
   }
-  a {
-    display: flex;
-    display: flex;
-    align-items: center;
+
+  &__head {
+    margin-bottom: 36px;
+
+    svg {
+      width: 32px;
+      height: 32px;
+      margin-right: 12px;
+    }
+
+    a {
+      display: flex;
+      display: flex;
+      align-items: center;
+    }
   }
 }
 .cart__title {
   color: #000;
 }
+
 .shoes__item {
   display: flex;
 }
-.item__img {
-  width: 300px;
-  height: 280px;
-  margin-right: 40px;
+
+.item {
+  &__img {
+    width: 300px;
+    height: 280px;
+    margin-right: 40px;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__name {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 25px;
+  }
+
+  &__price {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 100px;
+  }
+
+  /* 
+    В бэме не используется camelCase
+    нужно переделать на snake-case (add-to-cart)
+
+    Ознакомиться внимательнее с докой БЭМа
+    https://ru.bem.info/methodology/quick-start/
+  */
+  &__addToCartBtn {
+    background-color: rgb(168, 205, 47);
+    color: #fff;
+
+    &:hover {
+      box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    }
+  }
+
+  &__goToCartBtn {
+    background-color: rgb(255, 252, 73);
+    color: #000;
+
+    &:hover {
+      box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    }
+  }
 }
-.item__inner {
-  display: flex;
-  flex-direction: column;
-}
-.item__name {
-  font-size: 24px;
-  font-weight: 500;
-  margin-bottom: 25px;
-}
-.item__price {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 100px;
-}
+
 .itemBtn__wrapper {
   button {
     cursor: pointer;
@@ -160,20 +213,6 @@ export default {
     font-weight: 700;
     font-size: 16px;
     transition: 0.3s;
-  }
-}
-.item__addToCartBtn {
-  background-color: rgb(168, 205, 47);
-  color: #fff;
-  &:hover {
-    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
-  }
-}
-.item__goToCartBtn {
-  background-color: rgb(255, 252, 73);
-  color: #000;
-  &:hover {
-    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   }
 }
 </style>
