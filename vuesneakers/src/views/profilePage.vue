@@ -43,6 +43,7 @@ import icon from "@/components/icon.vue";
 import shoesItem from "@/components/shoesItem.vue";
 import stopper from "@/components/stopper.vue";
 import itemLoader from "@/components/itemLoader.vue";
+
 export default {
   components: {
     headerComponent,
@@ -51,12 +52,14 @@ export default {
     stopper,
     itemLoader,
   },
+
   data() {
     return {
       orders: [],
       isLoading: true,
     };
   },
+
   methods: {
     getOrders() {
       this.$api.getOrders
@@ -74,6 +77,7 @@ export default {
         });
     },
   },
+
   mounted() {
     this.getOrders();
   },
@@ -81,22 +85,24 @@ export default {
 </script>
 
 <style lang="scss">
-.profile__inner {
-  padding: 45px;
-}
-.profile__head {
-  display: flex;
-  align-items: center;
-  margin-bottom: 36px;
-  svg {
-    width: 32px;
-    height: 32px;
-    margin-right: 12px;
+  .profile__inner {
+    padding: 45px;
   }
-}
-.profile__content {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 40px;
-}
+
+  .profile__head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 36px;
+    svg {
+      width: 32px;
+      height: 32px;
+      margin-right: 12px;
+    }
+  }
+
+  .profile__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
 </style>

@@ -43,6 +43,7 @@ import headerComponent from "@/components/headerComponent.vue";
 import cartItem from "@/components/cartItem.vue";
 import icon from "@/components/icon.vue";
 import stopper from "@/components/stopper.vue";
+
 export default {
   components: {
     headerComponent,
@@ -50,16 +51,19 @@ export default {
     icon,
     stopper,
   },
+  
   computed: {
     totalPrice() {
       return this.$store.getters.getTotalPrice;
     },
   },
+
   data() {
     return {
       cart: [],
     };
   },
+
   mounted() {
     this.cart = this.$store.getters.allItems;
   },

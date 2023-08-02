@@ -25,6 +25,10 @@ export default {
   border-radius: 4px;
   cursor: pointer;
   transition: 0.3s;
+  /* 
+    Код не должен выглядеть как сжатый кусок говна,
+    проставляй переносы строки где это нужно
+  */
   &:hover {
     background-color: #fff;
   }

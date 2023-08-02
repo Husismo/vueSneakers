@@ -3,12 +3,13 @@ import Vue from "vue";
 
 const requireService = require.context("./service", false, /.service.js$/),
   instance = axios.create({
+    /* Вынести в .env */
     baseURL: "https://64c0c8650d8e251fd1129326.mockapi.io",
     responseType: "json",
     headers: {
       "Content-Type": "application/json",
       "Cache-Control": "no-cache",
-      Pragma: "no-cache", 
+      Pragma: "no-cache",
     },
   });
 

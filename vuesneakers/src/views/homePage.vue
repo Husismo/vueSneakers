@@ -30,6 +30,7 @@ import icon from "@/components/icon.vue";
 import shoesItem from "@/components/shoesItem.vue";
 import headerComponent from "@/components/headerComponent.vue";
 import itemLoader from "@/components/itemLoader.vue";
+
 export default {
   components: {
     headerComponent,
@@ -37,6 +38,7 @@ export default {
     icon,
     itemLoader,
   },
+
   methods: {
     getAllShoes() {
       this.$api.getAllshoes
@@ -50,9 +52,11 @@ export default {
         });
     },
   },
+
   mounted() {
     this.getAllShoes();
   },
+
   data() {
     return {
       isLoading: true,
@@ -63,19 +67,29 @@ export default {
 </script>
 
 <style lang="scss">
+/* 
+  1. import is deprecated, используй @use instead
+  https://sass-lang.com/documentation/at-rules/use/
+
+  2. Если это глобальные стили, то импорти их не в homePage, а в рут (App.vue)
+*/
 @import "@/styles/main.scss";
+
 .container {
   border-radius: 0 0 20px 20px;
 }
+
 .shoes__inner {
   padding: 45px;
 }
+
 .shoes__head {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 36px;
 }
+
 .shoes__search {
   padding: 13px;
   border-radius: 10px;
@@ -85,12 +99,15 @@ export default {
   border: 1px solid #f3f3f3;
   transition: 0.3s;
 }
+
 .shoes__search:hover {
   border-color: #d3d3d3;
 }
+
 .shoes__search:focus {
   border-color: #a7a7a7;
 }
+
 .shoes__content,
 .loading__wrapper {
   display: grid;

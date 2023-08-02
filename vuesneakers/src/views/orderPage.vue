@@ -82,6 +82,7 @@ import orderItem from "@/components/orderItem.vue";
 import orderConfirm from "@/components/orderConfirm.vue";
 import { validationMixin } from "vuelidate";
 import { required, minLength, email } from "vuelidate/lib/validators";
+
 export default {
   mixins: [validationMixin],
   components: {
@@ -90,6 +91,7 @@ export default {
     orderItem,
     orderConfirm,
   },
+  
   data() {
     return {
       cart: [],
@@ -104,6 +106,7 @@ export default {
       orderConfirm: false,
     };
   },
+
   validations: {
     order: {
       phoneNumber: { required, minLength: minLength(11) },
@@ -112,18 +115,25 @@ export default {
       adress: { required, minLength: minLength(10) },
     },
   },
+
   methods: {
+
     checkForm() {
       this.$v.order.$touch();
+
       if (!this.$v.order.$error) {
         return true;
       }
     },
+
     createOrder(event) {
       event.preventDefault();
+
       if (this.checkForm()) {
         this.isBtnDisabled = true; // костыли
+
         document.querySelector(`.order__btn`).setAttribute(`disabled`, true); //костыли
+
         this.$api.postOrder
           .postOrder({
             order: this.order,
@@ -149,10 +159,12 @@ export default {
 .order__inner {
   padding: 45px;
 }
+
 .order__content {
   display: flex;
   justify-content: space-around;
 }
+
 .order-form__wrapper {
   border-left: 1px solid #eaeaea;
   padding: 0px 60px;
@@ -165,6 +177,7 @@ export default {
     }
   }
 }
+
 .form__number,
 .form__email,
 .form__fullName,
@@ -176,13 +189,16 @@ export default {
   outline: none;
   transition: 0.3s;
   width: 100%;
+
   &:hover {
     border-color: #d3d3d3;
   }
+
   &:focus {
     border-color: #a7a7a7;
   }
 }
+
 .form__title {
   font-size: 18px;
   text-transform: uppercase;
@@ -190,6 +206,7 @@ export default {
   font-weight: 700;
   margin-bottom: 10px;
 }
+
 .form__comment {
   font-family: "Inter";
   resize: none;
@@ -220,18 +237,23 @@ export default {
   background: #9dd458;
   transition: 0.3s;
   width: 100%;
+
   &:hover {
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   }
 }
 .isInvalid {
   border-color: rgb(255, 74, 74);
+
   &::placeholder {
     color: rgb(255, 74, 74);
   }
+
   &:hover {
+    /* Повторяющиеся цвета можно вынести в глобальные css переменные */
     border-color: rgb(255, 40, 40);
   }
+
   &:focus {
     border-color: rgb(255, 40, 40);
   }

@@ -36,6 +36,7 @@ import headerComponent from "@/components/headerComponent.vue";
 import icon from "@/components/icon.vue";
 import shoesItem from "@/components/shoesItem.vue";
 import stopper from "@/components/stopper.vue";
+
 export default {
   components: {
     headerComponent,
@@ -43,11 +44,13 @@ export default {
     shoesItem,
     stopper,
   },
+
   data() {
     return {
       favoriteShoes: [],
     };
   },
+
   mounted() {
     this.favoriteShoes = this.$store.getters.getallFavorites;
   },
@@ -58,16 +61,19 @@ export default {
 .favorite__inner {
   padding: 45px;
 }
+
 .favorite__head {
   display: flex;
   align-items: center;
   margin-bottom: 36px;
+  
   svg {
     width: 32px;
     height: 32px;
     margin-right: 12px;
   }
 }
+
 .favorite__content {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
